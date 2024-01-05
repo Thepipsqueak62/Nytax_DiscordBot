@@ -3,14 +3,16 @@ import os
 import discord
 from discord.ext import commands
 from dotenv import load_dotenv
-from cogs.test_Persist_Buttons import RolesView
+
+from cogs.SlashCommands.modal_Test import MyModal
+from cogs.PersistentViews.test_Persist_Buttons import RolesView
 
 load_dotenv()
 
 intents = discord.Intents.all()
 
 
-class bot_Index(commands.Bot):
+class Client(commands.Bot):
     def __init__(self):
         super().__init__(
             command_prefix=commands.when_mentioned_or("!"),
@@ -33,17 +35,22 @@ class bot_Index(commands.Bot):
             print(e)
 
     async def setup_hook(self):
+        self.add_view(MyModal())
         self.add_view(RolesView())
 
-    async def load_cogs(self):
-        for filename in os.listdir("cogs"):
-            if filename.endswith(".py"):
-                await self.load_extension(f"cogs.{filename[:-3]}")
+    async def load_cogs(self, path="cogs"):
+        for filename in os.listdir(path):
+            file_path = os.path.join(path, filename)
+            if os.path.isdir(file_path):
+                await self.load_cogs(file_path)
+            elif filename.endswith(".py"):
+                cog_name = file_path.replace(os.path.sep, '.')[:-3]
+                await self.load_extension(cog_name)
 
 
 if __name__ == "__main__":
     async def main():
-        bot = bot_Index()
+        bot = Client()
         await bot.load_cogs()
         await bot.start(os.getenv('DISCORD_API_TOKEN'))
 
