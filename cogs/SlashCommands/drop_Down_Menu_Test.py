@@ -82,9 +82,9 @@ class drop_Down(commands.Cog):
 
         # Add the Remove Button
         role_ids = {
-            '1': 123456789012345678,  # Replace with your role ID for red
-            '2': 234567890123456789,  # Replace with your role ID for blue
-            '3': 345678901234567890   # Replace with your role ID for yellow
+            '1': 1093957528330698913,  # Replace with your role ID for red
+            '2': 1093957528330698913,  # Replace with your role ID for blue
+            '3': 1093957528330698913   # Replace with your role ID for yellow
         }
         selected_value = view.children[0].values[0]
         role_id = role_ids.get(selected_value)

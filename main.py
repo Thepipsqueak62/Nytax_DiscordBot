@@ -4,7 +4,6 @@ import discord
 from discord.ext import commands
 from dotenv import load_dotenv
 
-from cogs.SlashCommands.modal_Test import MyModal
 from cogs.PersistentViews.test_Persist_Buttons import RolesView
 
 load_dotenv()
@@ -35,7 +34,6 @@ class Client(commands.Bot):
             print(e)
 
     async def setup_hook(self):
-        self.add_view(MyModal())
         self.add_view(RolesView())
 
     async def load_cogs(self, path="cogs"):

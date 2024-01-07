@@ -19,7 +19,7 @@ class RolesView(discord.ui.View):
 
     @discord.ui.button(label="Role 1", custom_id="Role 1", style=discord.ButtonStyle.secondary)
     async def button1(self, interaction, button):
-        role_id = 1093956750274723971
+        role_id = 1127874025692082186
         user = interaction.user
         role = interaction.guild.get_role(role_id)
         if role:
