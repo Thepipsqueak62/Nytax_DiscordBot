@@ -16,7 +16,7 @@ class Roles(commands.Cog):
 class RolesView(discord.ui.View):
     def __init__(self):
         super().__init__(timeout=None)
-# This is the persistent Button
+# This is the persistent But
     @discord.ui.button(label="Role 1", custom_id="Role 1", style=discord.ButtonStyle.secondary)
     async def button1(self, interaction, button):
         role_id = 1127874025692082186
