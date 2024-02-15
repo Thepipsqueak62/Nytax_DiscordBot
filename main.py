@@ -4,6 +4,7 @@ import discord
 from discord.ext import commands
 from dotenv import load_dotenv
 
+
 from cogs.PersistentViews.test_Persist_Buttons import RolesView
 
 load_dotenv()
@@ -23,10 +24,24 @@ class Client(commands.Bot):
 
     async def on_ready(self):
         print(f"{self.user} Has Logged In")
+
+        # Print the number of guilds the bot is in
+        guild_count = len(self.guilds)
+        print(f"Connected to {guild_count} guilds:")
+
+        # Print information for each guild
+        for guild in self.guilds:
+            print(f" - {guild.name} (ID: {guild.id}) - {len(guild.members)} members")
+
+        # Print the total number of users
+        user_count = sum(len(guild.members) for guild in self.guilds)
+        print(f"Total users across all guilds: {user_count}")
+
         await self.change_presence(
             activity=discord.Activity(type=discord.ActivityType.playing, name="type !help for a list of commands"),
             status=discord.Status.online
         )
+
         try:
             synced = await self.tree.sync(guild=discord.Object(id=1041205088657616898))
             print(f"{len(synced)} command(s)")

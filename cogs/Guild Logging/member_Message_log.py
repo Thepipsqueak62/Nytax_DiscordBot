@@ -8,6 +8,7 @@ from discord import app_commands
 from discord.ext import commands
 import pymongo
 
+
 class MessageLogger(commands.Cog):
     def __init__(self, client, mongo_uri, database_name):
         self.bot = client
@@ -80,6 +81,7 @@ class MessageLogger(commands.Cog):
         self.log_channel_id = None
         self.save_log_channel_id()
         await ctx.response.send_message("Message log channel reset.")
+
 
 async def setup(client):
     mongo_uri = "mongodb+srv://Asicc:q31vCgHan67vo1ut@discordbotdatabse.66op6h9.mongodb.net/?retryWrites=true&w=majority"

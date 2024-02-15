@@ -1,36 +1,47 @@
 import discord
 from discord.ext import commands
-from discord import app_commands, ui
+from discord import app_commands,ui
 
 
 class MyModal(ui.Modal, title="hello world"):
     name = ui.TextInput(label="Please Enter Name",
-                          placeholder="John Doe",
-                          custom_id="nameField",
-                          style=discord.TextStyle.short)
+                        placeholder="John Doe",
+                        custom_id="nameField",
+                        style=discord.TextStyle.short)
     age = ui.TextInput(label="Please Enter Age",
                        placeholder="18+",
                        custom_id="ageField",
                        style=discord.TextStyle.short)
     about = ui.TextInput(label="Tell me about Yourself",
-                         placeholder="im gay",
+                         placeholder="I'm gay",
                          custom_id="aboutField",
                          style=discord.TextStyle.long)
 
     async def on_submit(self, interaction: discord.Interaction):
-        await interaction.response.send_message(f"Hello **{self.name}** You are **{self.age}** years old and **{self.about}"
-                                                f"about yourself")
+        # Acknowledge the interaction with an ephemeral message
+        await interaction.response.send_message("Processing your request...", ephemeral=True)
+
+        # Replace with your desired channel ID
+        target_channel_id = 1096075647312461835
+
+        # Try to get the channel from the guild
+        target_channel = interaction.guild.get_channel(target_channel_id)
+
+        if target_channel:
+            # Send the message to the specified channel
+            await target_channel.send(
+                f"Hello **{self.name.value}**! You are **{self.age.value}** years old and **{self.about.value}** about yourself")
+        else:
+            print("Target channel not found.")
 
 
-class modal_Test(commands.Cog):
+class ModalTest(commands.Cog):
     def __init__(self, client):
         self.client = client
 
     @commands.Cog.listener()
     async def on_ready(self):
         print("Slash Cogs Loaded")
-
-    # Pings the Discord Bot (ms)
 
     @app_commands.command(name="modal", description="Ping Slash")
     async def modal(self, interaction: discord.Interaction):
@@ -39,4 +50,4 @@ class modal_Test(commands.Cog):
 
 async def setup(client):
     client.remove_command("help")
-    await client.add_cog(modal_Test(client), guilds=[discord.Object(id="1041205088657616898")])
+    await client.add_cog(ModalTest(client), guilds=[discord.Object(id="1041205088657616898")])

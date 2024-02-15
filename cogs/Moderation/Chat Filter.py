@@ -15,7 +15,10 @@ class WordBlacklist(commands.Cog):
         content_lower = message.content.lower()
         if any(word in content_lower for word in self.blacklist_words):
             await message.delete()
-            await message.channel.send(f"{message.author.mention}, please refrain from using inappropriate language.")
+
+            # Send a direct message to the user
+            dm_channel = await message.author.create_dm()
+            await dm_channel.send(f"{message.author.mention}, please refrain from using inappropriate language.")
 
 
 async def setup(client):

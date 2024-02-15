@@ -4,16 +4,18 @@ from discord import app_commands
 import Paginator
 
 H1 = discord.Embed(title="Command List", description="List of  Usable Prefix(!) and SlashCommands")
-welcome = discord.Embed(title="ArcheRage Bot",
-                        description="Player Hosted Discord Bot",
+welcome = discord.Embed(title="Nytaks",
+                        description="Hello My Name is Kijin i'm a Python Developer \n"
+                                    "Nytax is General Purpose Bot Better than Mee6 :)s"
+                                    ,
                         color=0x115599)
 welcome.add_field(name="What now?", value="Use the Previous, Next Buttons to Navigate ")
 H1.add_field(name="Help Command", value="use /help for a list of commands ")
 
 embeds = [
-    welcome.set_image(url="https://www.mmobomb.com/file/2017/06/ArcheAge-Erenor-Harpy-620x388.jpg"),
+    welcome.set_image(url=""),
     H1.set_thumbnail(
-        url="https://1000logos.net/wp-content/uploads/2020/09/ArcheAge-logo.png"),
+        url=""),
 ]
 
 
